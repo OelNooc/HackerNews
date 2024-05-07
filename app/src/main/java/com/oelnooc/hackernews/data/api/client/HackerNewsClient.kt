@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class HackerNewsClient {
 
     companion object{
-        private const val base_url = "https://hn.algolia.com/api/v1/"
+        const val base_url = "https://hn.algolia.com/api/v1/"
 
         fun getInstance() : HackerNewsApiService
         {
