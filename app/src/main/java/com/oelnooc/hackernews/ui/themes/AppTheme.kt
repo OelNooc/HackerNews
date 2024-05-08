@@ -11,6 +11,8 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 
 object AppTheme {
@@ -37,7 +39,7 @@ object AppTheme {
                 .padding(16.dp)
                 .background(AppColor.white)
         ) {
-            Text(text = title, color = AppColor.black)
+            Text(text = title, color = AppColor.black, fontSize = TextUnit(24F, TextUnitType.Sp))
             Text(text = subtitle, color = AppColor.darkGray)
         }
     }

@@ -1,6 +1,7 @@
 package com.oelnooc.hackernews.ui.composables
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,9 +32,12 @@ class HomeScreen : ComponentActivity() {
 
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeScreenViewModel::class.java]
 
+        viewModel.getData()
+
         setContent {
             AppTheme.myAppTheme {
                 val hits by viewModel.hits.observeAsState(initial = emptyList())
+                Log.d("HomeScreen", "Hits count: ${hits.size}")
                 HitList(hits)
             }
         }
@@ -42,11 +46,20 @@ class HomeScreen : ComponentActivity() {
     @Composable
     fun HitList(hits: List<HitEntity>) {
         LazyColumn {
-            items(hits) { hit ->
-                AppTheme.listItem(
-                    title = hit.title,
-                    subtitle = "${hit.author} - ${hit.createdAt}"
-                )
+            if (hits.isEmpty()) {
+                items(1) {
+                    AppTheme.listItem(
+                        title = "No item to list",
+                        subtitle = "error on the api call"
+                    )
+                }
+            } else{
+                items(hits) { hit ->
+                    AppTheme.listItem(
+                        title = hit.title,
+                        subtitle = "${hit.author} - ${hit.createdAt}"
+                    )
+                }
             }
         }
     }
