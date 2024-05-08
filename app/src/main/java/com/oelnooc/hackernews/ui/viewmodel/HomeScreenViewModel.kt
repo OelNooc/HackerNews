@@ -1,5 +1,6 @@
 package com.oelnooc.hackernews.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,7 @@ class HomeScreenViewModel (private val repository: HackerNewsRepository) : ViewM
         viewModelScope.launch {
             try {
                 mutableHits.value = repository.getHits(QUERY)
+                Log.d("callHits", "${mutableHits.value}")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
