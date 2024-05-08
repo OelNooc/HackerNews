@@ -2,15 +2,16 @@ package com.oelnooc.hackernews.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.Gson
 
 @Entity
 data class HitEntity(
     @PrimaryKey
     val objectID: String,
-    val highlightResult: HighlightResult,
-    val tags: List<String>,
+    val highlightResult: String,
+    val tags: String,
     val author: String,
-    val children: List<Int>?,
+    val children: String,
     val commentText: String,
     val createdAt: String,
     val createdAtI: Int,
@@ -28,10 +29,10 @@ data class HitEntity(
         fun fromHit(hit: Hit): HitEntity {
             return HitEntity(
                 objectID = hit.objectID,
-                highlightResult = hit.highlightResult,
-                tags = hit.tags,
+                highlightResult = Gson().toJson(hit.highlightResult),
+                tags = Gson().toJson(hit.tags),
                 author = hit.author,
-                children = hit.children,
+                children = Gson().toJson(hit.children),
                 commentText = hit.commentText,
                 createdAt = hit.createdAt,
                 createdAtI = hit.createdAtI,
